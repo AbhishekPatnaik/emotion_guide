@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+
+
+  <style>
+    .keen-dashboard {
+  background: #f2f2f2;
+  font-family: 'Gotham Rounded SSm A', 'Gotham Rounded SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.keen-dataviz {
+  background: #fff;
+  border: 1px solid #e7e7e7;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+.keen-dataviz-title {
+  border-bottom: 1px solid #e7e7e7;
+  border-radius: 2px 2px 0 0;
+  font-size: 13px;
+  padding: 2px 10px 0;
+  text-transform: uppercase;
+}
+.keen-dataviz-stage {
+  padding: 10px;
+}
+
+.keen-dataviz-notes {
+  background: #fbfbfb;
+  border-radius: 0 0 2px 2px;
+  border-top: 1px solid #e7e7e7;
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 11px;
+  padding: 0 10px;
+}
+
+.keen-dataviz .keen-dataviz-metric {
+  border-radius: 2px;
+}
+
+.keen-dataviz .keen-spinner-indicator {
+  border-top-color: rgba(0, 187, 222, .4);
+}
+
+.keen-dashboard .chart-wrapper {
+  background: #fff;
+  border: 1px solid #e2e2e2;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+.keen-dashboard .chart-wrapper .chart-title {
+  border-bottom: 1px solid #d7d7d7;
+  color: #666;
+  font-size: 14px;
+  font-weight: 200;
+  padding: 7px 10px 4px;
+}
+
+.keen-dashboard .chart-wrapper .chart-stage {
+  overflow: hidden;
+  padding: 5px 10px;
+  position: relative;
+}
+
+.keen-dashboard .chart-wrapper .chart-notes {
+  background: #fbfbfb;
+  border-top: 1px solid #e2e2e2;
+  color: #808080;
+  font-size: 12px;
+  padding: 8px 10px 5px;
+}
+
+.keen-dashboard .chart-wrapper .keen-dataviz,
+.keen-dashboard .chart-wrapper .keen-dataviz-title,
+.keen-dashboard .chart-stage .chart-title {
+  border: medium none;
+}
+
+.sidenav {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #111; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left .5s;
+  padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+a, a:focus, a:hover, a:active {
+  color: #00afd7;
+}
+
+h1, h2, h3 {
+  font-family: "Gotham Rounded", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 12px 0;
+}
+h1 {
+  font-size: 32px;
+  font-weight: 100;
+  letter-spacing: .02em;
+  line-height: 48px;
+  margin: 12px 0;
+}
+h2 {
+  color: #2a333c;
+  font-weight: 200;
+  font-size: 21px;
+}
+h3 {
+  color: rgb(84, 102, 120);
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: -0.28px;
+  line-height: 29.39px;
+}
+
+.btn {
+  background: transparent;
+  border: 1px solid white;
+}
+
+.keen-logo {
+  height: 38px;
+  margin: 0 15px 0 0;
+  width: 150px;
+}
+
+.navbar-toggle {
+  background-color: rgba(255,255,255,.25);
+}
+.navbar-toggle .icon-bar {
+  background: #fff;
+}
+
+
+.navbar-nav {
+  margin: 5px 0 0;
+}
+.navbar-nav > li > a {
+  font-size: 15px;
+  font-weight: 200;
+  letter-spacing: 0.03em;
+  padding-top: 19px;
+  text-shadow: 0 0 2px rgba(0,0,0,.1);
+}
+.navbar-nav > li > a:focus,
+.navbar-nav > li > a:hover {
+  background: transparent none;
+}
+
+.navbar-nav > li > a.navbar-btn {
+  background-color: rgba(255,255,255,.25);
+  border: medium none;
+  padding: 10px 15px;
+}
+.navbar-nav > li > a.navbar-btn:focus,
+.navbar-nav > li > a.navbar-btn:hover {
+  background-color: rgba(255,255,255,.35);
+}
+.navbar-collapse {
+  box-shadow: none;
+}
+
+.masthead {
+  background-color: #00afd7;
+  background-image: url("../img/bg-bars.png");
+  background-position: 0 -290px;
+  background-repeat: repeat-x;
+  color: #fff;
+  margin: 0 0 24px;
+  padding: 20px 0;
+}
+.masthead h1 {
+  margin: 0;
+}
+.masthead small,
+.masthead a,
+.masthead a:focus,
+.masthead a:hover,
+.masthead a:active {
+  color: #fff;
+}
+.masthead p {
+  color: #b3e7f3;
+  font-weight: 100;
+  letter-spacing: .05em;
+}
+
+
+
+.hero {
+  background-position: 50% 100%;
+  min-height: 450px;
+  text-align: center;
+}
+.hero h1 {
+  font-size: 48px;
+  margin: 120px 0 0;
+}
+.hero .lead {
+  margin-bottom: 32px;
+}
+.hero a.hero-btn {
+  border: 2px solid #fff;
+  display: block;
+  font-family: "Gotham Rounded", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 200;
+  margin: 0 auto 12px;
+  max-width: 320px;
+  padding: 12px 0 6px;
+}
+.hero a.hero-btn:focus,
+.hero a.hero-btn:hover {
+  border-color: transparent;
+  background-color: #fff;
+  color: #00afd7;
+}
+
+
+.sample-item {
+  margin-bottom: 24px;
+}
+
+.signup {
+  float: left;
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: -6px;
+  margin-right: 10px;
+}
+
+.love {
+  border-top: 1px solid #d7d7d7;
+  color: #546678;
+  margin: 24px 0 0;
+  padding: 15px 0;
+  text-align: center;
+}
+
+.love p {
+  margin-bottom: 0;
+}
+
+  </style>
+  <script type="text/javascript" >
+    !function(name,path,ctx){
+  var latest,prev=name!=='Keen'&&window.Keen?window.Keen:false;ctx[name]=ctx[name]||{ready:function(fn){var h=document.getElementsByTagName('head')[0],s=document.createElement('script'),w=window,loaded;s.onload=s.onerror=s.onreadystatechange=function(){if((s.readyState&&!(/^c|loade/.test(s.readyState)))||loaded){return}s.onload=s.onreadystatechange=null;loaded=1;latest=w.Keen;if(prev){w.Keen=prev}else{try{delete w.Keen}catch(e){w.Keen=void 0}}ctx[name]=latest;ctx[name].ready(fn)};s.async=1;s.src=path;h.parentNode.insertBefore(s,h)}}
+}('KeenTracking','https://d26b395fwzu5fz.cloudfront.net/keen-tracking-1.1.4.min.js',this);
+
+KeenTracking.ready(function() {
+  var meta = new KeenTracking({
+    projectId: '5368fa5436bf5a5623000000',
+    writeKey: '725f3a571824d9c29f6e4d1c39af349a114d9034f8e493f95d39802529e2ccbb174033077bdcf10b541dbb50c20105922c59bbe1fe7741cb4b632dd0bc84fe98c0b591e17da3d429ef867cc674be0ad20ad768a5210662d2d18ff5492f37a1f91ce697a5489064bb3fa95c827b6cb394'
+  });
+  meta.recordEvent('visits', {
+    page: {
+      title: document.title,
+      host: document.location.host,
+      href: document.location.href,
+      path: document.location.pathname,
+      protocol: document.location.protocol.replace(/:/g, ''),
+      query: document.location.search
+    },
+    visitor: {
+      referrer: document.referrer,
+      ip_address: '${keen.ip}',
+      // tech: {} //^ created by ip_to_geo add-on
+      user_agent: '${keen.user_agent}'
+      // visitor: {} //^ created by ua_parser add-on
+    },
+    keen: {
+      timestamp: new Date().toISOString(),
+      addons: [
+        { name:'keen:ip_to_geo', input: { ip:'visitor.ip_address' }, output:'visitor.geo' },
+        { name:'keen:ua_parser', input: { ua_string:'visitor.user_agent' }, output:'visitor.tech' }
+      ]
+    }
+  });
+});
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+  </script>
+<head>
+  <title>Emotion Detector</title>
+  <meta charset="utf-8">
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+  <link href="https://cloud.typography.com/737368/747986/css/fonts.css" rel="stylesheet" type="text/css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/keen-static.css" rel="stylesheet" type='text/css' />
+  <link href="assets/css/keen-dashboards.css" rel="stylesheet" type='text/css' />
+</head>
+
+
+
+
+<body>
+
+  <div class="masthead hero">
+    <div class="container">
+
+      <header class="navbar navbar-static">
+        <div class="navbar-header">
+          <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".keen-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="https://keen.io?s=db_land" class="navbar-brand" target="_blank">
+            <svg class="keen-logo" xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 594 128" enable-background="new 0 0 594 128" xml:space="preserve">
+              <g class="icon">
+                <polygon class="red" fill="#FFFFFF" points="59.811,73.135 66.859,85.34 49.275,115.863 140.807,115.863 147.814,128 28.045,128"></polygon>
+                <polygon class="green" fill="#FFFFFF" points="59.873,24.297 91.504,79.242 77.413,79.242 59.826,48.781 13.958,128 0,128"></polygon>
+                <polygon class="blue" fill="#FFFFFF" points="133.769,103.674 70.364,103.674 77.418,91.432 112.586,91.432 66.915,12.1 73.9,0"></polygon>
+              </g>
+              <path class="text" fill="#FFFFFF" d="M246.12 94.163L216.29 57.373l27.704-27.484c1.199-1.195 1.782-2.475 1.782-3.91 0-2.906-2.496-5.453-5.341-5.453 -1.869 0-3.128 0.887-4.262 1.896l-43.89 44.996V26.094c0-3.07-2.498-5.568-5.568-5.568 -2.96 0-5.461 2.549-5.461 5.568v72.01c0 3.02 2.501 5.57 5.461 5.57 3.07 0 5.568-2.498 5.568-5.57V81.145l16.181-16.178 29.093 36.231c1.15 1.643 2.655 2.477 4.474 2.477 3.021 0 5.573-2.551 5.573-5.57C247.604 96.301 246.896 95.151 246.12 94.163zM309.211 71.702c0-15.379-9.767-30.948-28.434-30.948 -16.456 0-29.348 13.941-29.348 31.743v0.23c0 18.1 13.108 31.748 30.49 31.748 9.265 0 16.353-2.836 22.95-9.162 1.104-0.967 1.713-2.248 1.713-3.609 0-2.631-2.192-4.771-4.887-4.771 -1.466 0-2.503 0.719-3.195 1.293 -4.886 4.5-10.083 6.596-16.354 6.596 -10.378 0-18.167-7.188-19.675-18.006h41.627C306.917 76.815 309.211 74.52 309.211 71.702zM280.55 50.182c11.501 0 16.667 9.162 17.751 18.117h-35.831C263.956 57.574 271.266 50.182 280.55 50.182zM374.018 71.702c0-15.379-9.767-30.948-28.434-30.948 -16.454 0-29.344 13.941-29.344 31.743v0.23c0 18.1 13.107 31.748 30.486 31.748 9.263 0 16.351-2.836 22.95-9.164 1.103-0.965 1.71-2.246 1.71-3.607 0-2.631-2.193-4.771-4.889-4.771 -1.464 0-2.501 0.719-3.193 1.293 -4.886 4.5-10.082 6.596-16.352 6.596 -10.374 0-18.163-7.189-19.677-18.006h41.626C371.723 76.815 374.018 74.52 374.018 71.702zM345.357 50.182c11.497 0 16.662 9.162 17.749 18.117h-35.83C328.762 57.574 336.072 50.182 345.357 50.182zM414.734 40.754c-8.037 0-14.492 3.127-19.233 9.309V46.9c0-3.062-2.396-5.461-5.455-5.461 -2.945 0-5.342 2.449-5.342 5.461v51.319c0 3.059 2.396 5.455 5.455 5.455 3.045 0 5.342-2.346 5.342-5.455V68.271c0-10.312 6.874-17.514 16.717-17.514 9.606 0 15.342 6.291 15.342 16.826v30.635c0 3.059 2.398 5.455 5.461 5.455 2.999 0 5.348-2.396 5.348-5.455V65.414C438.369 50.434 429.092 40.754 414.734 40.754zM491.424 20.525c-2.958 0-5.457 2.549-5.457 5.568v72.01c0 3.02 2.499 5.57 5.457 5.57 3.072 0 5.572-2.498 5.572-5.57v-72.01C496.996 23.023 494.496 20.525 491.424 20.525zM552.307 19.725c-23.504 0-41.916 18.613-41.916 42.373v0.229c0 24.03 17.923 42.149 41.689 42.149 23.507 0 41.92-18.613 41.92-42.377v-0.227C594 37.844 576.076 19.725 552.307 19.725zM582.627 62.098v0.229c0 18.133-13.035 31.807-30.32 31.807 -17.411 0-30.541-13.773-30.541-32.036v-0.227c0-18.131 13.032-31.803 30.314-31.803C569.209 30.068 582.627 44.137 582.627 62.098z"></path>
+            </svg>
+          </a>
+        </div>
+        <nav class="navbar-collapse collapse keen-navbar-collapse" role="navigation">
+          <ul class="nav navbar-nav main-nav">
+            <li><a href="https://keen.io/blog/101269629091/charts-on-grids-responsive-dashboard-templates-with?s=db_land" target="_blank">About</a></li>
+            <li><a href="https://github.com/keen/dashboards" target="_blank">Docs</a></li>
+            <li><a href="https://keen.io/team?s=db_land" target="_blank">Team</a></li>
+            <li><a href="https://blog.keen.io/?s=db_land" target="_blank">Blog</a></li>
+            <li><a href="http://slack.keen.io/" target="_blank">Community</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://keen.io/signup?s=gh-dashboards" class="btn navbar-btn" target="_blank">Create a Free Project</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <h1>Emotion Detector Using deep Learning</h1>
+      <p class="lead">It helps you to read emtions</p>
+      
+
+
+    </div>
+  </div>
+
+
+
+
+<div>
+  <h1>Html code header</h1>
+
+</div>
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#">About</a>
+  <a href="#">Services</a>
+  <a href="#">Clients</a>
+  <a href="#">Contact</a>
+</div>
+
+<!-- Use any element to open the sidenav -->
+<button onclick="openNav()">open</button>
+
+
+<!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+<div id="main">
+  ...
+</div>
+ <div id = "container" style = "width: 650px; height: 400px; margin: 0 auto"></div>
+      <script type="text/javascript" src="charts.js"></script>
+</body>
+</html>
